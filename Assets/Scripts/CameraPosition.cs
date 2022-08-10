@@ -17,7 +17,7 @@ public class CameraPosition : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             transform.position = isCameraLocked ? transform.position
                 : new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z - 4);
@@ -47,7 +47,7 @@ public class CameraPosition : MonoBehaviour
         }
         else
         {
-            if(Input.mousePosition.y > Screen.height - cameraMargin)
+            if (Input.mousePosition.y > Screen.height - cameraMargin)
             {
                 cameraPosition.z += cameraSpeed * Time.deltaTime;
             }
