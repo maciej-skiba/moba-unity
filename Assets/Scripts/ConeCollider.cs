@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ConeCollider : MonoBehaviour
 {
-    private List<GameObject> currentCollisions = new List<GameObject>();
+    //this method causes poor performance
+    //TO DO: change it for something more efficient
+    public List<GameObject> currentCollisions = new List<GameObject>();
 
-    void OnTriggerEnter(Collider col)
+    private void OnTriggerStay(Collider col)
     {
-        Debug.Log("OntrigEnter");
         // Add the GameObject collided with to the list.
         currentCollisions.Add(col.gameObject);
 
@@ -17,18 +18,7 @@ public class ConeCollider : MonoBehaviour
         {
             print(gObject.name);
         }
-    }
-
-    void OnTriggerExit(Collider col)
-    {
-        Debug.Log("OntrigExit");
-        // Remove the GameObject collided with from the list.
-        currentCollisions.Remove(col.gameObject);
-
-        // Print the entire list to the console.
-        foreach (GameObject gObject in currentCollisions)
-        {
-            print(gObject.name);
-        }
+        Debug.Log("OnTrigStay");
     }
 }
+

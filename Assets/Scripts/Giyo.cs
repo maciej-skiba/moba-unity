@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +9,7 @@ public class Giyo : Champion
     [SerializeField] private Animator Q_Animator;
     [SerializeField] private GameObject E_Dragon;
     [SerializeField] private Animator E_Animator;
+    [SerializeField] private ConeCollider coneCollider;
 
     private NavMeshAgent myAgent;
     private float W_Expiry;
@@ -37,13 +39,6 @@ public class Giyo : Champion
             {
                 W_Ended = true;
                 myAgent.speed /= 2.0f;
-            }
-        }
-        if (abilityCtrl.E_onCD)
-        {
-            if (Time.time > E_Expiry)
-            {
-                E_Dragon.SetActive(false);
             }
         }
     }
@@ -79,9 +74,7 @@ public class Giyo : Champion
      */
     public void Cast_E()
     {
-        E_Dragon.SetActive(true);
-        E_Animator.SetTrigger("E_Casted");
-        E_Expiry = Time.time + 1.5f;
+        StartCoroutine(CoCastE());
         Debug.Log("E casted");
     }
 
@@ -90,5 +83,32 @@ public class Giyo : Champion
         this.attackDamage *= 2;
         yield return new WaitForSeconds(3.0f);
         this.attackDamage /= 2;
+    }
+
+    IEnumerator CoCastE()
+    {
+        E_Dragon.SetActive(true);
+        E_Animator.SetTrigger("E_Casted");
+
+        List<GameObject> E_collisions = coneCollider.currentCollisions;
+        foreach (GameObject obj in E_collisions)
+        {
+            if(obj != null)
+            {
+                obj.GetComponent<HealthAndStatus>().isStunned = true;
+                obj.transform.Find("StunStars").gameObject.SetActive(true);
+            }
+        }
+        yield return new WaitForSeconds(1.5f);
+
+        foreach (GameObject obj in E_collisions)
+        {
+            if(obj != null)
+            {
+                obj.GetComponent<HealthAndStatus>().isStunned = false;
+                obj.transform.Find("StunStars").gameObject.SetActive(false);
+            }
+        }
+        E_Dragon.SetActive(false);
     }
 }

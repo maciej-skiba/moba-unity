@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class AbilityController : MonoBehaviour
 {
-    private int nofAbilities = 3;
     private float Q_AvailableTime = 0;
     private float W_AvailableTime = 0;
     private float E_AvailableTime = 0;

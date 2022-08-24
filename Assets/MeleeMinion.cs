@@ -16,6 +16,7 @@ public class MeleeMinion : MonoBehaviour
     private bool isSwinging = false;
     private DetectPlayer playerDetecter;
     private float meleeMinionDamage = 10.0f;
+    private HealthAndStatus healthAndStatus;
 
     public delegate void AttackDelegate(GameObject gObject);
     public static event AttackDelegate AttackEvent;
@@ -28,6 +29,7 @@ public class MeleeMinion : MonoBehaviour
         myAgent = GetComponent<NavMeshAgent>();
         AttackEvent += DealDamage;
         playerDetecter = GetComponent<DetectPlayer>();
+        healthAndStatus = GetComponent<HealthAndStatus>();
     }
     private void Start()
     {
@@ -35,6 +37,12 @@ public class MeleeMinion : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log("isStunned: " + healthAndStatus.isStunned);
+        if(healthAndStatus.isStunned)
+        {
+            AgentStop();
+            return;
+        }
         if (playerDetecter.followingPlayer)
         {
             //check if target is not Dead
