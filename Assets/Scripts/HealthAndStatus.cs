@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthAndStatus : MonoBehaviour
 {
     [SerializeField] private float updateSpeedSeconds;
+    [SerializeField] private TextMeshProUGUI _healthText;
+
     private float maxHealth;
 
     [HideInInspector] public Image foregroundImage;
-    public float Health;
-    public float Mana;
-    public float Energy;
+    public float health;
+    public float mana;
+    public float energy;
     public bool isStunned = false;
+
+    public static HealthAndStatus Instance { get; set; }
     private void Awake()
     {
-        maxHealth = Health;
+        maxHealth = health;
     }
     private void OnEnable()
     {
@@ -29,7 +34,11 @@ public class HealthAndStatus : MonoBehaviour
     }
     private void Update()
     {
-        if(Health <= 0)
+        if (_healthText != null) _healthText.text = "HP: " + health.ToString();
+
+        print(health);
+
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
@@ -50,7 +59,7 @@ public class HealthAndStatus : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
 
-            newFillAmount = Mathf.Lerp((float)preChangePct, (float)this.Health / (float)this.maxHealth, timeElapsed / updateSpeedSeconds);
+            newFillAmount = Mathf.Lerp((float)preChangePct, (float)this.health / (float)this.maxHealth, timeElapsed / updateSpeedSeconds);
             foregroundImage.fillAmount = newFillAmount;
                 
             yield return null;

@@ -14,11 +14,10 @@ public class ConeCollider : MonoBehaviour
         currentCollisions.Add(col.gameObject);
 
         // Print the entire list to the console.
-        foreach (GameObject gObject in currentCollisions)
-        {
-            print(gObject.name);
-        }
-        Debug.Log("OnTrigStay");
+        //foreach (GameObject gObject in currentCollisions)
+        //{
+        //    print(gObject.name);
+        //}
     }
 }
 

@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
                 GameObject nearestEnemy = GetClosestEnemy();
                 if(nearestEnemy != null)
                 {
+                    attackTarget = nearestEnemy;
                     StartAttacking(nearestEnemy);
                 }
                 else
@@ -214,7 +215,7 @@ public class Player : MonoBehaviour
     private void DealDamage(GameObject target)
     {
         if(target != null)
-            target.GetComponent<HealthAndStatus>().Health -= champion.attackDamage;
+            target.GetComponent<HealthAndStatus>().health -= champion.attackDamage;
     }
 
     //attack in the swing moment, not in the start of attack animation

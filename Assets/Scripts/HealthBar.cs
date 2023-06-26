@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    //[SerializeField] private GameObject healthPrefab;
-
     private Image healthForeground; //Image childrena
 
     private float verticalOffset = 2.0f;

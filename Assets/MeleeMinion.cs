@@ -37,7 +37,6 @@ public class MeleeMinion : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log("isStunned: " + healthAndStatus.isStunned);
         if(healthAndStatus.isStunned)
         {
             AgentStop();
@@ -107,7 +106,6 @@ public class MeleeMinion : MonoBehaviour
     private void Attack(GameObject target)
     {
         isAttacking = true;
-        Debug.Log("prettack");
         animator.SetBool("isAgentMoving", false);
         animator.SetBool("isAgentAttacking", true);
         if (!isSwinging)
@@ -117,7 +115,7 @@ public class MeleeMinion : MonoBehaviour
     private void DealDamage(GameObject target)
     {
         if (target != null)
-            target.GetComponent<HealthAndStatus>().Health -= meleeMinionDamage;
+            target.GetComponent<HealthAndStatus>().health -= meleeMinionDamage;
     }
 
     //attack in the swing moment, not in the start of attack animation
@@ -130,7 +128,6 @@ public class MeleeMinion : MonoBehaviour
         {
             AttackEvent(target);
             attackAvailableTime = Time.time + champion.attackSpeed - swingTime;
-            Debug.Log("Attack");
             isSwinging = false;
         }
     }

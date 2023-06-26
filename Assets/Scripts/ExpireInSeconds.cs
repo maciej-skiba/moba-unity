@@ -11,7 +11,6 @@ public class ExpireInSeconds : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Expiry time = " + expiryTime);
         if(Time.time > expiryTime)
         {
             Destroy(gameObject);

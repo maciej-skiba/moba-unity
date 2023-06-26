@@ -24,7 +24,6 @@ public class DetectPlayer : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("FollowingPlayer = " + followingPlayer);
         if(followingPlayer)
         {
             // Determine which direction to rotate towards

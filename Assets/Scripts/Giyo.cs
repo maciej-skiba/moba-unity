@@ -17,10 +17,21 @@ public class Giyo : Champion
     private bool W_Ended = true;
     private float E_Expiry;
 
-    static public int[] Cooldowns = { 4, 5, 6 };
+    public int health;
+    public static int[] Cooldowns = { 4, 5, 6 };
+    public static Giyo Instance { get; set; }
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         myAgent = GetComponent<NavMeshAgent>();
         abilityCtrl = GetComponent<AbilityController>();
     }
