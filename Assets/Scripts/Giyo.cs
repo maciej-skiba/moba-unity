@@ -16,8 +16,8 @@ public class Giyo : Champion
     private AbilityController abilityCtrl;
     private bool W_Ended = true;
     private float E_Expiry;
+    private short _enemyLayer = 7;
 
-    public int health;
     public static int[] Cooldowns = { 4, 5, 6 };
     public static Giyo Instance { get; set; }
 
@@ -114,7 +114,7 @@ public class Giyo : Champion
 
         foreach (GameObject obj in E_collisions)
         {
-            if(obj != null)
+            if(obj.layer == _enemyLayer)
             {
                 obj.GetComponent<HealthAndStatus>().isStunned = false;
                 obj.transform.Find("StunStars").gameObject.SetActive(false);

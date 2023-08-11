@@ -10,6 +10,7 @@ public class ConeCollider : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
+        if (col.gameObject.GetComponent<Minion>())
         // Add the GameObject collided with to the list.
         currentCollisions.Add(col.gameObject);
 

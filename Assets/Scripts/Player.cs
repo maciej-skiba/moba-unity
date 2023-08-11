@@ -196,11 +196,11 @@ public class Player : MonoBehaviour
     //finds the closest object with Enemy script attached
     GameObject GetClosestEnemy()
     {
-        Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+        Minion[] enemies = GameObject.FindObjectsOfType<Minion>();
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
-        foreach (Enemy e in enemies)
+        foreach (Minion e in enemies)
         {
             float dist = Vector3.Distance(e.transform.position, currentPos);
             if (dist < minDist)
